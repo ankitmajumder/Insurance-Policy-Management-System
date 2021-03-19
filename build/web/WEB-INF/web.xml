@@ -65,6 +65,10 @@
         <servlet-name>AssignPolicy</servlet-name>
         <servlet-class>exavaluservelet.AssignPolicy</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteAssignPolicy</servlet-name>
+        <servlet-class>exavaluservelet.DeleteAssignPolicy</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -116,6 +120,10 @@
     <servlet-mapping>
         <servlet-name>AssignPolicy</servlet-name>
         <url-pattern>/AssignPolicy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAssignPolicy</servlet-name>
+        <url-pattern>/DeleteAssignPolicy</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
