@@ -5,8 +5,17 @@
  */
 package exavaluservelet;
 
+import exavaluUtilities.connectionProvidertoDb;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -72,6 +81,33 @@ public class Admins extends HttpServlet {
             throws ServletException, IOException {
       String name = request.getParameter("name");
       String password = request.getParameter("password");
+       Connection connection = connectionProvidertoDb.getConnectionObject().getConnection("E:\\ExavaluProject\\WebApplication1\\config\\dbParams.properties");
+        String sql = "SELECT * FROM admin where name=? and password=?";
+        
+          PreparedStatement stmt;
+        try {
+            stmt = connection.prepareStatement(sql);
+             stmt.setString(1, name);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                  RequestDispatcher rd = request.getRequestDispatcher("AdminHomePage.jsp");
+
+                rd.forward(request, response);
+            }
+            else{
+                RequestDispatcher rd = request.getRequestDispatcher("Admin.jsp");
+
+                rd.forward(request, response);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Admins.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+       
+            
+     
+          
       
     }
 

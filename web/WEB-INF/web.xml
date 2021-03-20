@@ -77,6 +77,10 @@
         <servlet-name>Admins</servlet-name>
         <servlet-class>exavaluservelet.Admins</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteCompnay</servlet-name>
+        <servlet-class>exavaluservelet.DeleteCompnay</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -140,6 +144,10 @@
     <servlet-mapping>
         <servlet-name>Admins</servlet-name>
         <url-pattern>/Admins</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCompnay</servlet-name>
+        <url-pattern>/DeleteCompnay</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
