@@ -28,12 +28,15 @@
             <a href="#" style="font-size: 10px; color: #5995fd; text-decoration: none;">Forgot Password?</a>
           </form>
 
-          <form action="#" class="sign-up-form" method=post oninput='confirmPasswordFromSignup.setCustomValidity(confirmPasswordFromSignup.value != passwordFromSignup.value ? "Passwords do not match." : "")'>
+          <form name="sign-up-form" action="#" class="sign-up-form" method="post"
+            oninput='confirmPasswordFromSignup.setCustomValidity(confirmPasswordFromSignup.value != passwordFromSignup.value ? "Passwords do not match." : "")'
+            onsubmit="return validateForm()" required>
+
             <h2 class="title">Sign Up</h2>
-            <div class="input-field">
+            <!-- <div class="input-field">
               <i class="fas fa-user"></i>
               <input name="companyId" type="number" placeholder="Company Id" />
-            </div>
+            </div> -->
             <div class="input-field">
               <i class="fas fa-user"></i>
               <input name="companyName" type="text" placeholder="Company Name" />
@@ -62,7 +65,6 @@
           </form>
         </div>
       </div>
-
       <div class="panels-container">
         <div class="panel left-panel">
           <div class="content">
@@ -90,7 +92,15 @@
         </div>
       </div>
     </div>
-    
+    <script>
+      function validateForm() {
+        var x = document.forms["sign-up-form"]["companyName"].value;
+        if (x == "") {
+          alert("Company Name must be filled out");
+          return false;
+        }
+    }
+    </script>
     <script src="js/app.js"></script>
   </body>
 </html>
