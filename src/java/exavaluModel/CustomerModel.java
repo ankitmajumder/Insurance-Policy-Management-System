@@ -24,18 +24,18 @@ import javax.servlet.http.HttpServletRequest;
  * @author Thomas
  */
 public class CustomerModel {
-public static int gen() {
-    Random r = new Random( System.currentTimeMillis() );
-    return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
-}
+//public static int gen() {
+//    Random r = new Random( System.currentTimeMillis() );
+//    return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+//}
 
     public static int addCompany(Customer customer, HttpServletRequest request) throws IOException, SQLException {
         int i = (int) request.getSession().getAttribute("companyId");
-         int rand = gen();
+         //int rand = gen();
         Connection connection = connectionProvidertoDb.getConnectionObject().getConnection("E:\\ExavaluProject\\WebApplication1\\config\\dbParams.properties");
-        PreparedStatement pstmt = connection.prepareStatement("insert into customer(company_id,cutomer_name,occupation,age,gender,annual_income) values (?,?,?,?,?,?,?)");
+        PreparedStatement pstmt = connection.prepareStatement("insert into customer(company_id,customer_id ,cutomer_name,occupation,age,gender,annual_income) values (?,?,?,?,?,?,?)");
         pstmt.setInt(1, i);
-        pstmt.setDouble(2, rand);
+        pstmt.setInt(2, customer.getCustomerId());
         pstmt.setString(3, customer.getCustomerName());
         pstmt.setString(4, customer.getOccupation());
         pstmt.setInt(5, customer.getAge());
@@ -43,13 +43,13 @@ public static int gen() {
          pstmt.setInt(7, customer.getAnnualIncome());
         int status = pstmt.executeUpdate();
         pstmt = connection.prepareStatement("insert into contactaddress(customer_id,email,phonenumber,company_id) values (?,?,?,?) ");
-        pstmt.setDouble(1, rand);
+        pstmt.setInt(1,  customer.getCustomerId());
         pstmt.setString(2, customer.getContactAddress().getEmail());
         pstmt.setString(3, customer.getContactAddress().getPhoneNumber());
         pstmt.setInt(4, i);
         status = pstmt.executeUpdate();
         pstmt = connection.prepareStatement("insert into address(customer_id,addressone,addresstwo,city,state,country,pincode,company_id) values(?,?,?,?,?,?,?,?)  ");
-        pstmt.setDouble(1,rand);
+        pstmt.setInt(1, customer.getCustomerId());
         pstmt.setString(2, customer.getAddress().getAddressOne());
         pstmt.setString(3, customer.getAddress().getAddressTwo());
         pstmt.setString(4, customer.getAddress().getCity());
@@ -100,13 +100,15 @@ public static int gen() {
             }
          return list;
         }
-      public static Customer getCustomerId(int id) throws IOException, SQLException{  
+      public static Customer getCustomerId(int id,HttpServletRequest request) throws IOException, SQLException{  
+          int ids = (int)request.getSession().getAttribute("companyId");
           Customer customer = new Customer();
           ContactAddress contactAddress=new ContactAddress();
           Address address=new Address();
            Connection connection = connectionProvidertoDb.getConnectionObject().getConnection("E:\\ExavaluProject\\WebApplication1\\config\\dbParams.properties");
-            PreparedStatement ps=connection.prepareStatement("SELECT * FROM customer,contactaddress,address where customer.customer_id=? and customer.customer_id=contactaddress.customer_id and customer.customer_id=address.customer_id ");  
-            ps.setInt(1,id);  
+            PreparedStatement ps=connection.prepareStatement("SELECT * FROM customer,contactaddress,address where customer.customer_id=contactaddress.customer_id and customer.customer_id=address.customer_id and customer.company_id=contactaddress.company_id and customer.company_id=address.company_id and  customer.company_id=? and customer.customer_id=? ");  
+            ps.setInt(1,ids);  
+            ps.setInt(2,id);  
             ResultSet rs=ps.executeQuery(); 
             if(rs.next()){ 
                 customer.setCustomerId(rs.getInt("customer_id"));

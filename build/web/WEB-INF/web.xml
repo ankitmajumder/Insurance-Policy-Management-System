@@ -69,6 +69,14 @@
         <servlet-name>DeleteAssignPolicy</servlet-name>
         <servlet-class>exavaluservelet.DeleteAssignPolicy</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FeedBacks</servlet-name>
+        <servlet-class>exavaluservelet.FeedBacks</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Admins</servlet-name>
+        <servlet-class>exavaluservelet.Admins</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -124,6 +132,14 @@
     <servlet-mapping>
         <servlet-name>DeleteAssignPolicy</servlet-name>
         <url-pattern>/DeleteAssignPolicy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedBacks</servlet-name>
+        <url-pattern>/FeedBacks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admins</servlet-name>
+        <url-pattern>/Admins</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

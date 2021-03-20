@@ -75,13 +75,15 @@ public class PolicyModel {
         return i;
 
     }
-    public static policy getPolicyId(int id) throws IOException{  
+    public static policy getPolicyId(int id,HttpServletRequest request) throws IOException{
+        int ids= (int) request.getSession().getAttribute("companyId");
         policy p=new policy();  
           Connection connection = connectionProvidertoDb.getConnectionObject().getConnection("E:\\ExavaluProject\\WebApplication1\\config\\dbParams.properties");
         try{  
             
-            PreparedStatement ps=connection.prepareStatement("select * from policy where pid=?");  
-            ps.setInt(1,id);  
+            PreparedStatement ps=connection.prepareStatement("select * from policy where pid=? and  company_id=? ");  
+            ps.setInt(1,id); 
+            ps.setInt(2,ids); 
             ResultSet rs=ps.executeQuery();  
             if(rs.next()){  
                 p.setPid(rs.getInt(1));  

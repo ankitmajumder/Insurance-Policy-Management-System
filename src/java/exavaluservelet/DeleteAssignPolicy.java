@@ -5,11 +5,16 @@
  */
 package exavaluservelet;
 
+import exavaluModel.AssignPolicym;
 import exavaluUtilities.connectionProvidertoDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -59,13 +64,21 @@ public class DeleteAssignPolicy extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         int i = (int) request.getSession().getAttribute("companyId");
          String pid = request.getParameter("policyId");
-        int pids = Integer.parseInt(pid);
-        String cid = request.getParameter("customer_id");
+        int pids  = Integer.parseInt(pid);
+        String cid = request.getParameter("cid");
+         
+        
         int cids = Integer.parseInt(cid);
-        Connection connection = connectionProvidertoDb.getConnectionObject().getConnection("E:\\ExavaluProject\\WebApplication1\\config\\dbParams.properties");
-        PreparedStatement stmt = connection.prepareStatement("DELETE from policy where pid=? and company_id=?");
+        
+           if (pids > 0) {
+            AssignPolicym.delete(cids,pids,request);
+              System.out.println("Delete Successful...........");
+                
+            RequestDispatcher rd = request.getRequestDispatcher("showAssignPolicy.jsp");
+
+            rd.forward(request, response);
+        }
         
         
         

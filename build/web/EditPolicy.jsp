@@ -11,7 +11,7 @@
     <%
          String sid=request.getParameter("pid");  
          int pid=Integer.parseInt(sid);
-         policy e=PolicyModel.getPolicyId(pid);  
+         policy e=PolicyModel.getPolicyId(pid,request);  
         %>
 <html>
     <head>

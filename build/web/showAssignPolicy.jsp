@@ -33,6 +33,7 @@ while(rs.next()){
 <td><%=rs.getString("cutomer_name") %></td>
 <td><%=rs.getString("pname") %></td>
 <td> <a href="DeleteAssignPolicy?cid=<%=rs.getInt("customer_id")%>&policyId=<%=rs.getInt("pid") %>">Delete</a> </td>
+<td> <a href="EditAssignPolicys.jsp?cid=<%=rs.getInt("customer_id")%>&policyId=<%=rs.getInt("pid") %>">Edit</a> </td>
 </tr>
 <%
 }

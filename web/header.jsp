@@ -45,7 +45,7 @@
                         <li><a href="CompanyAdd.jsp" title="customer"> Company  </a></li>
                         <li><a href="Customers.jsp" title="customer"> Customer  </a></li>
                         <li><a href="showAssignPolicy.jsp" title="customer"> AssignCustomer  </a></li>
-
+                         <li><a href="FeedBack.jsp" title="customer"> Feedback  </a></li>
                         <li><a href="Logout" title="logout"> Logout</a></li>
                     </ul>
                 </nav>
