@@ -3,7 +3,7 @@ input {
   font-family: "Poppins", sans-serif;
 }
 
-form {
+.editForm {
   display: flex;
   align-items: center;
   justify-content: center;
