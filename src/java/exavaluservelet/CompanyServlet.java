@@ -87,9 +87,9 @@ public class CompanyServlet extends HttpServlet {
             
         try {
             PrintWriter out = response.getWriter();
-            String pid = request.getParameter("company_id");
-
-            int pids = Integer.parseInt(pid);
+//            String pid = request.getParameter("company_id");
+//
+//            int pids = Integer.parseInt(pid);
 
             String cname = request.getParameter("companyname");
             String cmail = request.getParameter("companyemail");
@@ -98,7 +98,7 @@ public class CompanyServlet extends HttpServlet {
             String password = request.getParameter("password");
             Company company = new Company();
             CompanyLogin companyLogin = new CompanyLogin();
-            company.setCompany_id(pids);
+           // company.setCompany_id(pids);
             company.setCompanyName(cname);
             companyLogin.setCompanyEmail(cmail);
             companyLogin.setPassword(password);
@@ -111,21 +111,21 @@ public class CompanyServlet extends HttpServlet {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, cmail);
             ResultSet rs = stmt.executeQuery();
-            String sql1 = "select company_id from company where company_id=? ";
-            PreparedStatement stmt1 = connection.prepareStatement(sql1);
-            stmt1.setInt(1, pids);
-            ResultSet rs1 = stmt1.executeQuery();
+//            String sql1 = "select company_id from company where company_id=? ";
+//            PreparedStatement stmt1 = connection.prepareStatement(sql1);
+//            stmt1.setInt(1, pids);
+//            ResultSet rs1 = stmt1.executeQuery();
             if(rs.next() ){
                 RequestDispatcher rd = request.getRequestDispatcher("CompanyAdd.jsp");
                   out.println("<h1>Email Exists </h1>");
                 rd.forward(request, response);
             }
-            else if(rs1.next())
-            {
-                 RequestDispatcher rd = request.getRequestDispatcher("CompanyAdd.jsp");
-                  out.println("<h1>Usename Exists </h1>");
-                rd.forward(request, response);
-            }
+//            else if(rs1.next())
+//            {
+//                 RequestDispatcher rd = request.getRequestDispatcher("CompanyAdd.jsp");
+//                  out.println("<h1>Usename Exists </h1>");
+//                rd.forward(request, response);
+//            }
             else{
             status = CompanyModel.addCompany(company);
             if (status > 0) {

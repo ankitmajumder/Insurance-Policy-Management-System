@@ -12,12 +12,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title></title>
           <jsp:include page="header.jsp" />
+             <%
+            
+            int ids= (int) request.getSession().getAttribute("companyId");
+        %>
     </head>
+    <div class="container">
+    <form class="form-inline" method="post" action="CustomerSearch">
+    <input type="text" name="serachInput"  class="form-control" placeholder="">
+    <input type="hidden" value="<%=ids %>" name="compId">
+    <button type="submit" name="save" class="btn btn-primary">Search</button>
+    </form>
+    </div>
     <body>
       
-          <table >
+          <table>
               
                 <thead>
                     <tr>

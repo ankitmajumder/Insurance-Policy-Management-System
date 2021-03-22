@@ -81,6 +81,14 @@
         <servlet-name>DeleteCompnay</servlet-name>
         <servlet-class>exavaluservelet.DeleteCompnay</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PolicySearch</servlet-name>
+        <servlet-class>exavaluservelet.PolicySearch</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerSearch</servlet-name>
+        <servlet-class>exavaluservelet.CustomerSearch</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -148,6 +156,14 @@
     <servlet-mapping>
         <servlet-name>DeleteCompnay</servlet-name>
         <url-pattern>/DeleteCompnay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PolicySearch</servlet-name>
+        <url-pattern>/PolicySearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerSearch</servlet-name>
+        <url-pattern>/CustomerSearch</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

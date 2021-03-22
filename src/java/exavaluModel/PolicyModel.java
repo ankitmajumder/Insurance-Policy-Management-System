@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,7 +25,10 @@ import javax.servlet.http.HttpSession;
  * @author Thomas
  */
 public class PolicyModel {
-       // HttpSession session=request.getSession(false);
+       public static int gen() {
+    Random r = new Random( System.currentTimeMillis() );
+    return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+}
 
     public static List<policy> getAllPolicys(HttpServletRequest request) {
         // ArrayList list = new ArrayList();
@@ -126,14 +130,14 @@ public class PolicyModel {
    public static int addPolicy(policy policys, HttpServletRequest request) throws IOException, SQLException {
        int status = 0;
        int i= (int) request.getSession().getAttribute("companyId");
-   
+       int rand = gen();
 
       Connection connection = connectionProvidertoDb.getConnectionObject().getConnection("E:\\ExavaluProject\\WebApplication1\\config\\dbParams.properties");
       PreparedStatement pstmt =
       connection.prepareStatement("insert into policy(company_id,pid,pname,expirydate,launchdate,preimumammount,coverageammount,minimumagecoverage,maxage) values (?,?,?,?,?,?,?,?,?)");
      
       pstmt.setInt(1,i);
-      pstmt.setInt(2, policys.getPid());
+      pstmt.setInt(2, rand);
       pstmt.setString(3, policys.getName());
       pstmt.setInt(4, policys.getExpiryDate());
       pstmt.setInt(5, policys.getLaunchDate());

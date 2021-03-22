@@ -40,14 +40,23 @@
     <body> 
         <%
             User user = (User) request.getSession().getAttribute("user");
-
+            int ids= (int) request.getSession().getAttribute("companyId");
         %>
-
+            
+        
+        
+        
 
         <jsp:include page="header.jsp" />
+        <br>
 
-
-
+<div class="container">
+    <form class="form-inline" method="post" action="PolicySearch">
+    <input type="text" name="serachInput"  class="form-control" placeholder="">
+    <input type="hidden" value="<%=ids %>" name="compId">
+    <button type="submit" name="save" class="btn btn-primary">Search</button>
+    </form>
+    </div>
 
       
 
@@ -103,6 +112,7 @@
 
             </table>
                 <button > <a href="AddPolicy.jsp">AddPolicy</a> </button>
+                
         </div>
 
         <script>

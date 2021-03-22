@@ -14,7 +14,7 @@
 <%
          String sid=request.getParameter("cid");  
          int cid=Integer.parseInt(sid);
-       Customer  e=CustomerModel.getCustomerId(cid);  
+       Customer  e=CustomerModel.getCustomerId(cid,request);  
         %>
 
 

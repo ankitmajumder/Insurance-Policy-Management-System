@@ -46,8 +46,8 @@ public class AddPolicy extends HttpServlet {
          
      //  CompanyLogin  companyLogin=(CompanyLogin)request.getSession().getAttribute("companyId");
           int i = (int) request.getSession().getAttribute("companyId");
-        String pid = request.getParameter("pid");
-        int pids = Integer.parseInt(pid);
+//        String pid = request.getParameter("pid");
+//        int pids = Integer.parseInt(pid);
         String pname = request.getParameter("pname");
         String exd = request.getParameter("ExpiaryDate");
         int exds = Integer.parseInt(exd);
@@ -62,7 +62,7 @@ public class AddPolicy extends HttpServlet {
         String mag = request.getParameter("Maxage");
         int mags = Integer.parseInt(mag);
         policy p = new policy();
-        p.setPid(pids);
+      //  p.setPid(pids);
         p.setName(pname);
         p.setExpiryDate(exds);
         p.setLaunchDate(lds);
@@ -70,18 +70,18 @@ public class AddPolicy extends HttpServlet {
         p.setCoverageammount(cas);
         p.setMinumumage(mgs);
         p.setMaxage(mags);
-        Connection connection = connectionProvidertoDb.getConnectionObject().getConnection("E:\\ExavaluProject\\WebApplication1\\config\\dbParams.properties");
-         String sql1 = "select pid,company_id from policy where pid=? AND company_id=?";
-         PreparedStatement stmt1 = connection.prepareStatement(sql1);
-         stmt1.setInt(1, pids);
-         stmt1.setInt(2, i);
-         ResultSet rs1 = stmt1.executeQuery();
-          if(rs1.next() ){
-                RequestDispatcher rd = request.getRequestDispatcher("AddPolicy.jsp");
-                 out.println("<h1>PolicyId Already Exists </h1>");
-                rd.forward(request, response);
-            }
-          else{
+//        Connection connection = connectionProvidertoDb.getConnectionObject().getConnection("E:\\ExavaluProject\\WebApplication1\\config\\dbParams.properties");
+//         String sql1 = "select pid,company_id from policy where pid=? AND company_id=?";
+//         PreparedStatement stmt1 = connection.prepareStatement(sql1);
+//        // stmt1.setInt(1, pids);
+//         stmt1.setInt(1, i);
+//         ResultSet rs1 = stmt1.executeQuery();
+//          if(rs1.next() ){
+//                RequestDispatcher rd = request.getRequestDispatcher("AddPolicy.jsp");
+//                 out.println("<h1>PolicyId Already Exists </h1>");
+//                rd.forward(request, response);
+//            }
+         // else{
         
          try {
             int status=PolicyModel.addPolicy(p,request);
@@ -94,12 +94,12 @@ public class AddPolicy extends HttpServlet {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-          }
+          }//
         
        
 
         
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

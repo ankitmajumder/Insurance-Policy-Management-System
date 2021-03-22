@@ -24,18 +24,18 @@ import javax.servlet.http.HttpServletRequest;
  * @author Thomas
  */
 public class CustomerModel {
-//public static int gen() {
-//    Random r = new Random( System.currentTimeMillis() );
-//    return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
-//}
+public static int gen() {
+    Random r = new Random( System.currentTimeMillis() );
+    return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+}
 
     public static int addCompany(Customer customer, HttpServletRequest request) throws IOException, SQLException {
         int i = (int) request.getSession().getAttribute("companyId");
-         //int rand = gen();
+         int rand = gen();
         Connection connection = connectionProvidertoDb.getConnectionObject().getConnection("E:\\ExavaluProject\\WebApplication1\\config\\dbParams.properties");
         PreparedStatement pstmt = connection.prepareStatement("insert into customer(company_id,customer_id ,cutomer_name,occupation,age,gender,annual_income) values (?,?,?,?,?,?,?)");
         pstmt.setInt(1, i);
-        pstmt.setInt(2, customer.getCustomerId());
+        pstmt.setInt(2, rand);
         pstmt.setString(3, customer.getCustomerName());
         pstmt.setString(4, customer.getOccupation());
         pstmt.setInt(5, customer.getAge());
@@ -43,13 +43,13 @@ public class CustomerModel {
          pstmt.setInt(7, customer.getAnnualIncome());
         int status = pstmt.executeUpdate();
         pstmt = connection.prepareStatement("insert into contactaddress(customer_id,email,phonenumber,company_id) values (?,?,?,?) ");
-        pstmt.setInt(1,  customer.getCustomerId());
+        pstmt.setInt(1,  rand);
         pstmt.setString(2, customer.getContactAddress().getEmail());
         pstmt.setString(3, customer.getContactAddress().getPhoneNumber());
         pstmt.setInt(4, i);
         status = pstmt.executeUpdate();
         pstmt = connection.prepareStatement("insert into address(customer_id,addressone,addresstwo,city,state,country,pincode,company_id) values(?,?,?,?,?,?,?,?)  ");
-        pstmt.setInt(1, customer.getCustomerId());
+        pstmt.setInt(1, rand);
         pstmt.setString(2, customer.getAddress().getAddressOne());
         pstmt.setString(3, customer.getAddress().getAddressTwo());
         pstmt.setString(4, customer.getAddress().getCity());

@@ -103,7 +103,7 @@ public class AssignPolicy extends HttpServlet {
                     int status = AssignPolicym.addCompany(assignPolicy, request);
                     if (status > 0) {
 
-                        response.sendRedirect("homePage.jsp");
+                        response.sendRedirect("showAssignPolicy.jsp");
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(AssignPolicy.class.getName()).log(Level.SEVERE, null, ex);

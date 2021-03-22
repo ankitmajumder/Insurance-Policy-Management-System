@@ -43,8 +43,8 @@ public class AddCustomer extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
           int i = (int) request.getSession().getAttribute("companyId");
-         String customerId = request.getParameter("customerId");
-         int customerIds = Integer.parseInt(customerId);
+//         String customerId = request.getParameter("customerId");
+//         int customerIds = Integer.parseInt(customerId);
          String customerName = request.getParameter("customerName");
          String occupation = request.getParameter("occupation");
          String age = request.getParameter("age");
@@ -63,7 +63,7 @@ public class AddCustomer extends HttpServlet {
          Customer customer=new Customer();
          Address address=new Address();
          ContactAddress contactAddress=new ContactAddress();
-         customer.setCustomerId(customerIds);
+        // customer.setCustomerId(customerIds);
          customer.setCustomerName(customerName);
          customer.setOccupation(occupation);
          customer.setAge(ages);
@@ -79,18 +79,18 @@ public class AddCustomer extends HttpServlet {
          address.setPincode(ages);
          customer.setContactAddress(contactAddress);
          customer.setAddress(address);
-         Connection connection = connectionProvidertoDb.getConnectionObject().getConnection("E:\\ExavaluProject\\WebApplication1\\config\\dbParams.properties");
-         String sql1 = "select  customer_id,customer.company_id from customer where customer_id=? and customer.company_id=? ";
-         PreparedStatement stmt1 = connection.prepareStatement(sql1);
-         stmt1.setInt(1, customerIds);
-         stmt1.setInt(2, i);
-         ResultSet rs1 = stmt1.executeQuery();
-          if(rs1.next() ){
-              out.println("<h1>CustomerId Already Exists </h1>");
-                RequestDispatcher rd = request.getRequestDispatcher("AddCustomer.jsp");
-                 
-                rd.forward(request, response);
-            }
+//         Connection connection = connectionProvidertoDb.getConnectionObject().getConnection("E:\\ExavaluProject\\WebApplication1\\config\\dbParams.properties");
+//         String sql1 = "select  customer_id,customer.company_id from customer where customer_id=? and customer.company_id=? ";
+//         PreparedStatement stmt1 = connection.prepareStatement(sql1);
+//         stmt1.setInt(1, customerIds);
+//         stmt1.setInt(2, i);
+//         ResultSet rs1 = stmt1.executeQuery();
+//          if(rs1.next() ){
+//              out.println("<h1>CustomerId Already Exists </h1>");
+//                RequestDispatcher rd = request.getRequestDispatcher("AddCustomer.jsp");
+//                 
+//                rd.forward(request, response);
+//            }
 
           
          int status = CustomerModel.addCompany(customer, request);

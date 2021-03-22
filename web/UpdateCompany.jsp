@@ -30,7 +30,7 @@ String CompanyPassword=request.getParameter("CompanyPassword");
 try
 {
 
-String sql="update company,companylogin set companyname=?,phonenumber=?,address=?,CompanyEmailAddress=?,CompanyPassword=?  where company.company_id="+compid ;
+String sql="update company,companylogin set companyname=?,phonenumber=?,address=?,CompanyEmailAddress=?,CompanyPassword=?  where  company.company_id=companylogin.company_id and company.company_id="+compid ;
 ps = connection.prepareStatement(sql);
 ps.setString(1,companyname);
 ps.setString(2,phonenumber);
